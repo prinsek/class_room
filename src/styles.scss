@@ -1,1 +1,53 @@
 /* You can add global styles to this file, and also import other style files */
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.example-spacer {
+    flex: 1 1 auto;
+  }
+  .forSignUp{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 20px;
+    height: 77%;
+    width: 31%;
+    text-align: center;
+  }
+ .signupContant{
+   color: rgb(127, 170, 255);
+   
+ }
+ .signupFooter{
+   position: absolute;
+   left: 530px;
+   top: 580px;
+ }
+
+ .form-container{
+  display: block;
+  max-width: 300px;
+  margin: auto;
+  background: #eceff1;
+  padding: 45px;
+  border-radius: 16px;
+ }
+ .form-container mat-form-field{
+   width: 100%;
+}
+.center{
+  display: flex;
+  justify-content: center;
+}
+.margin-top{
+  margin-top: 16px;
+}
+.text-center{
+  text-align: center;
+}
+  
+ 

@@ -1,0 +1,48 @@
+<div class="form-container">
+    <h1>Login</h1>
+    <form [formGroup]="loginComponent">
+    <mat-form-field>
+        <input matInput placeholder="Email" formControlName="email"
+        [ngClass]="{
+            'is-invalid':
+              submitted && fg_master['email'].errors
+          }">
+          <div
+                    *ngIf="submitted && fg_master.email.errors"
+                    class="validation-error"
+                  >
+                  <div
+                  *ngIf="fg_master.email.errors['required']"
+                >
+                    Email is required
+                  </div>
+                    <div *ngIf="fg_master.email.errors['pattern']">
+                      Email is invalid
+                    </div>
+                    </div>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Password" formControlName="password" type="password"
+        [ngClass]="{
+            'is-invalid':
+              submitted && fg_master['email'].errors
+          }">
+        <div
+                    *ngIf="submitted && fg_master['pending_arrear'].errors"
+                    class="validation-error"
+                  >
+                    <div *ngIf="fg_master['pending_arrear'].errors['required']">
+                      Password is required
+                    </div>
+                  </div>
+    </mat-form-field>
+<div class="center margin-top">
+    <button mat-raised-button color="btn btn-primary" type="submit">
+        Login
+    </button>
+</div>   
+    <span class="center margin-top">Recruit? <a class="sign-up-link" routerLink="signup">Sign-up!</a></span>
+    </form>
+</div>
+
+

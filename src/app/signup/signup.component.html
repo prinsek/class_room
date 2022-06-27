@@ -1,0 +1,42 @@
+<!-- <div class="forSignUp">
+    <h2 class="signupContant" style="margin-top: 13px;">Google</h2>
+    <h1>Choose an account</h1>
+    <div class="row">
+            <table style="margin-top: 15px; width: 50%;position: relative;left: 111px;">
+                <tr>
+                    <td rowspan="2"><i class="fa-solid fa-user" title="google account"></i></td>
+                    <td>Prinse Kumar</td>
+                </tr>
+                <tr>
+                    <td><a href="">prinse@mapmyindia.com</a></td>
+                </tr>
+            </table>
+        <hr style="width: 85%; margin-left: 30px;">
+        <h4 style="font-size: 15px;"><i class="fa-solid fa-user-plus"></i>Use another account</h4 >
+        <hr style="width: 85%; margin-left: 30px;">
+        <h4 style="font-size: 15px;"><i class="fa-solid fa-circle-minus"></i>Remove an account</h4>
+        <hr style="width: 85%; margin-left: 30px;">
+
+    </div>   
+</div>
+<div class="signupFooter">
+    <span>English(United State)<i class="fa-solid fa-arrow-down" (click)="countryList()"></i></span>
+    <span><a href="https://support.google.com/accounts?hl=en#topic=3382296">Help</a></span>
+    <span><a href="https://policies.google.com/privacy?gl=IN&hl=en">Privacy</a></span>
+    <span><a href="https://policies.google.com/terms?gl=IN&hl=en">Terms</a></span>
+</div> -->
+<div>
+    <form [formGroup]="selectCheck">
+        <div>
+            <label>Select</label>
+            <select formControlName="select" (change)="modelChange($event)">
+                <option value="1">rat</option>
+                <option value="2">rat</option>
+                <option value="3">rat</option>
+                <option value="4">rat</option>
+            </select>
+        </div>
+       
+    </form>
+    
+</div>
