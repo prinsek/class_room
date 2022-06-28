@@ -1,40 +1,14 @@
-<div class="form-container">
+<div class="form-container mat-elevation-z5">
     <h1>Login</h1>
-    <form [formGroup]="loginComponent">
+    <form [formGroup]="loginComponent" (ngSubmit)="submit()">
     <mat-form-field>
-        <input matInput placeholder="Email" formControlName="email"
-        [ngClass]="{
-            'is-invalid':
-              submitted && fg_master['email'].errors
-          }">
-          <div
-                    *ngIf="submitted && fg_master.email.errors"
-                    class="validation-error"
-                  >
-                  <div
-                  *ngIf="fg_master.email.errors['required']"
-                >
-                    Email is required
-                  </div>
-                    <div *ngIf="fg_master.email.errors['pattern']">
-                      Email is invalid
-                    </div>
-                    </div>
+        <input matInput placeholder="Email" formControlName="email">
+       <mat-error *ngIf="email?.errors?.required"> Email is required</mat-error>
+       <mat-error *ngIf="email?.errors?.email"> Please enter a correct email</mat-error>
     </mat-form-field>
     <mat-form-field>
-        <input matInput placeholder="Password" formControlName="password" type="password"
-        [ngClass]="{
-            'is-invalid':
-              submitted && fg_master['email'].errors
-          }">
-        <div
-                    *ngIf="submitted && fg_master['pending_arrear'].errors"
-                    class="validation-error"
-                  >
-                    <div *ngIf="fg_master['pending_arrear'].errors['required']">
-                      Password is required
-                    </div>
-                  </div>
+        <input matInput placeholder="Password" formControlName="password" type="password">
+        <mat-error *ngIf="password?.errors?.required"> Password is required</mat-error>
     </mat-form-field>
 <div class="center margin-top">
     <button mat-raised-button color="btn btn-primary" type="submit">

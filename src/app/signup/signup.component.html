@@ -1,42 +1,33 @@
-<!-- <div class="forSignUp">
-    <h2 class="signupContant" style="margin-top: 13px;">Google</h2>
-    <h1>Choose an account</h1>
-    <div class="row">
-            <table style="margin-top: 15px; width: 50%;position: relative;left: 111px;">
-                <tr>
-                    <td rowspan="2"><i class="fa-solid fa-user" title="google account"></i></td>
-                    <td>Prinse Kumar</td>
-                </tr>
-                <tr>
-                    <td><a href="">prinse@mapmyindia.com</a></td>
-                </tr>
-            </table>
-        <hr style="width: 85%; margin-left: 30px;">
-        <h4 style="font-size: 15px;"><i class="fa-solid fa-user-plus"></i>Use another account</h4 >
-        <hr style="width: 85%; margin-left: 30px;">
-        <h4 style="font-size: 15px;"><i class="fa-solid fa-circle-minus"></i>Remove an account</h4>
-        <hr style="width: 85%; margin-left: 30px;">
-
-    </div>   
+<div class="form-container mat-elevation-z5">
+    <h1>Signup as a new user</h1>
+    <form [formGroup]="signupForm" (ngSubmit)="submit()">
+        <mat-form-field>
+            <input matInput placeholder="Name" formControlName="name" type="text">
+            <mat-error *ngIf="name?.errors?.required"> Name is required</mat-error>
+        </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Email" formControlName="email">
+       <mat-error *ngIf="email?.errors?.required"> Email is required</mat-error>
+       <mat-error *ngIf="email?.errors?.email"> Please enter a correct email</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Password" formControlName="password" type="password">
+        <mat-error *ngIf="password?.errors?.required"> Password is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Confirm Password" formControlName="confirmpassword" type="password">
+        <mat-error *ngIf="confirmpassword?.errors?.required">Confirm Password is required</mat-error>
+    </mat-form-field>
+    <mat-error *ngIf="signupForm.errors?.passwordsDontMatch">
+        Password should match
+    </mat-error>
+<div class="center margin-top">
+    <button mat-raised-button color="btn btn-primary" type="submit">
+        Sign Up
+    </button>
 </div>
-<div class="signupFooter">
-    <span>English(United State)<i class="fa-solid fa-arrow-down" (click)="countryList()"></i></span>
-    <span><a href="https://support.google.com/accounts?hl=en#topic=3382296">Help</a></span>
-    <span><a href="https://policies.google.com/privacy?gl=IN&hl=en">Privacy</a></span>
-    <span><a href="https://policies.google.com/terms?gl=IN&hl=en">Terms</a></span>
-</div> -->
-<div>
-    <form [formGroup]="selectCheck">
-        <div>
-            <label>Select</label>
-            <select formControlName="select" (change)="modelChange($event)">
-                <option value="1">rat</option>
-                <option value="2">rat</option>
-                <option value="3">rat</option>
-                <option value="4">rat</option>
-            </select>
-        </div>
-       
     </form>
-    
 </div>
+
+
+

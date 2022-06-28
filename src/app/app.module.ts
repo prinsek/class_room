@@ -13,13 +13,18 @@ import { MatFormFieldModule } from '@angular/material/form-field'
 import { SignupComponent } from './signup/signup.component';
 import { AngularFireModule} from '@angular/fire'
 import { environment } from 'src/environments/environment';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { HotToastModule } from '@ngneat/hot-toast';
+import { MatInputModule } from '@angular/material/input';
+import { HomeComponent } from './home/home.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     SigninComponent,
-    SignupComponent
+    SignupComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +35,10 @@ import { environment } from 'src/environments/environment';
    ReactiveFormsModule,
    MatFormFieldModule,
    FormsModule,
-   AngularFireModule.initializeApp(environment.firebase)
+   AngularFireModule.initializeApp(environment.firebase),
+   AngularFirestoreModule,
+   HotToastModule.forRoot(),
+   MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent],

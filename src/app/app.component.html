@@ -2,10 +2,19 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <mat-toolbar color="primary">
     Sign in flow with firebase
-    <button mat-button>
-        <mat-icon>login</mat-icon>
-        Login
-    </button>
+    <ng-container *ngIf="authserv.currentUser | async as user; else loginButton ">
+        <button mat-button (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            Logout
+        </button>
+
+    </ng-container>
+    <ng-template #loginButton>
+        <button mat-button routerLink="">
+            <mat-icon>login</mat-icon>
+            Login
+        </button>
+    </ng-template>
 </mat-toolbar>
 <div class="content">
     <router-outlet></router-outlet>
