@@ -16,7 +16,7 @@ import { environment } from 'src/environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { HotToastModule } from '@ngneat/hot-toast';
 import { MatInputModule } from '@angular/material/input';
-import { HomeComponent } from './home/home.component'
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,7 @@ import { HomeComponent } from './home/home.component'
     HeaderComponent,
     SigninComponent,
     SignupComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

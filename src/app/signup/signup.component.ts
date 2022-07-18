@@ -1,61 +1,80 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators,ValidatorFn } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+  Validators,
+  ValidatorFn,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
-export function passwordMatchValidators():ValidatorFn{
-  return (control:AbstractControl):ValidationErrors | null =>{
-const password=control.get('password')?.value;
-const confirmpassword=control.get('confirmpassword')?.value;
+export function passwordMatchValidators(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const password = control.get('password')?.value;
+    const confirmpassword = control.get('confirmpassword')?.value;
 
-if(password && confirmpassword && password!==confirmpassword){
-return {
-  passwordsDontMatch:true
-}
-}
-return null
-  }
+    if (password && confirmpassword && password !== confirmpassword) {
+      return {
+        passwordsDontMatch: true,
+      };
+    }
+    return null;
+  };
 }
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.scss']
+  styleUrls: ['./signup.component.scss'],
 })
 export class SignupComponent implements OnInit {
+  signupForm = new FormGroup(
+    {
+      name: new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.email, Validators.required]),
+      password: new FormControl('', Validators.required),
+      confirmpassword: new FormControl('', Validators.required),
+    },
+    { validators: passwordMatchValidators() }
+  );
+  constructor(
+    private authserv: AuthenticationService,
+    private router: Router
+  ) {}
 
-  signupForm=new FormGroup({
-    name:new FormControl('',Validators.required),
-    email:new FormControl('',[Validators.email, Validators.required]),
-    password:new FormControl('',Validators.required),
-    confirmpassword:new FormControl('', Validators.required)
-  },{validators: passwordMatchValidators()})
-  constructor(private authserv:AuthenticationService,private router:Router ) {
-    
-   }
- 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+  get name() {
+    return this.signupForm.get('name');
   }
-  get name(){
-    return this.signupForm.get('name')
+  get email() {
+    return this.signupForm.get('email');
   }
-  get email(){
-    return this.signupForm.get('email')
+  get password() {
+    return this.signupForm.get('password');
   }
-  get password(){
-    return this.signupForm.get('password')
-  }
-  get confirmpassword(){
-    return this.signupForm.get('confirmpassword')
+  get confirmpassword() {
+    return this.signupForm.get('confirmpassword');
   }
 
-  submit(){
-    if(this.signupForm.invalid){
+  async submit() {
+    if (this.signupForm.invalid) {
       return;
-    } 
-    const {name , email , password}=this.signupForm.value;
-    this.authserv.signUp(name,email,password)
-    this.router.navigate(['']);
+    }else{
+      const { name, email, password } = this.signupForm.value;
+
+      // await this.authserv.signUp(name,email, password).then((user)=>{
+      //   this.authserv.isUser=true
+      //   this.authserv.UserDetails=user
+      //   this.router.navigate([''])
+      // })
+
+
+      this.authserv.isUser=true;
+      this.authserv.signUp(name, email, password);
+      this.router.navigate(['']);
+    // }
    
-    
   }
+}
 }

@@ -1,1 +1,23 @@
-<h1 *ngIf="user$ |async as user">Welcome to our app {{user.email}}!</h1>
+<h1>Welcome to classroom {{email}}</h1>
+<!-- <select>
+    <option><i class="material-icons">home</i>werty</option>
+    <option>werty</option>
+    <option>werty</option>
+    <option>werty</option>
+</select> -->
+<div *ngIf="currentUpload">
+    <div class="progress">
+        <div class="progress-bar progress-bar-animated" [ngStyle]="{ 'width' : currentUpload?.progress + '%' }"></div>
+        </div>
+        progress : {{currentUpload?.name}} | {{currentUpload?.progress}}% complete
+</div>
+<header>File Upload</header>
+<div>
+    
+    <input type="file" name="file" (change)="detectFiles($event)"><br>
+    <button class="btn btn-primary" type="button" [disabled]="!selectedFiles" (click)="uploadSingle()">One file</button>
+    <br><br>
+    
+    <input type="file" name="file" (change)="detectFiles($event)"><br>
+    <button class="btn btn-primary" type="button" [disabled]="!selectedFiles" (click)="uploadMulti()">Multiple file</button>
+</div>
