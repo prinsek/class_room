@@ -11,46 +11,47 @@ import { Upload } from '../uploads/upload';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  user: any;
+  email: any;
+  name: any;
+  selectedFiles: FileList;
+  currentUpload: Upload;
 
-  user:any;
-  email:any;
-  name:any;
-  selectedFiles:FileList;
-  currentUpload : Upload;
-  
-  constructor(public authserv: AuthenticationService,public router:Router,private db: AngularFirestore, private upSvc: UploadService) {}
+  constructor(
+    public authserv: AuthenticationService,
+    public router: Router,
+    private db: AngularFirestore,
+    private upSvc: UploadService
+  ) {}
 
   ngOnInit() {
-    this.authserv.UserDetails==undefined?this.router.navigate(['']):null
+    this.authserv.UserDetails == undefined ? this.router.navigate(['']) : null;
     this.user = this.authserv.UserDetails;
     console.log(this.user);
-    this.email=this.user.user.email;
+    this.email = this.user.user.email;
 
-    this.getData()
-    
+    this.getData();
   }
 
-  async getData () {
+  async getData() {
+    let data = await this.db.collection('user').doc(this.email).get();
 
-   let data = await this.db.collection('user').doc(this.email).get()
-
-   console.log("Res",data);  
+    console.log('Res', data);
   }
-  detectFiles(event){
+  detectFiles(event) {
     this.selectedFiles = event.target.files;
   }
 
-  uploadSingle(){
+  uploadSingle() {
     let file = this.selectedFiles.item(0);
     this.currentUpload = new Upload(file);
     this.upSvc.pushUpload(this.currentUpload);
   }
 
-  uploadMulti(){
+  uploadMulti() {
     let file = this.selectedFiles.item(0);
     this.currentUpload = new Upload(file);
     this.upSvc.pushUpload(this.currentUpload);
-
 
     // let files = this.selectedFiles
     // let filesIndex = _.range(files.length)_.each(filesIndex, idx)=>{
@@ -58,5 +59,4 @@ export class HomeComponent implements OnInit {
     //   this.upSvc.pushUpload(this.currentUpload);
     // }
   }
-  
 }

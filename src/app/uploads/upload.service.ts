@@ -4,54 +4,59 @@ import firebase from 'firebase';
 import { Upload } from './upload';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UploadService {
   basePath: any;
 
-  constructor(private db:AngularFireDatabase) { }
+  constructor(private db: AngularFireDatabase) {}
 
   private uploadTask: firebase.storage.UploadTask;
 
-  pushUpload(upload:Upload){
-
-      let storageRef= firebase.storage().ref();
-      this.uploadTask = storageRef.child(`this.basePath/${upload.file.name}`).put(upload.file);
-
-      this.uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
-        (snapshot)=>{
-          //uplod in progress
-          upload.progress=(snapshot.bytesTransferred / snapshot.totalBytes) *100
-        },
-        (err)=>{
-          console.log(err)
-        },
-        ()=>{
-          upload.url=this.uploadTask.snapshot.downloadURL
-          upload.name = upload.file.name
-          this.saveFileData(upload)
-        })
-
-      
+  pushUpload(upload: Upload) {
+    debugger;
+    let storageRef = firebase.storage().ref();
+    this.uploadTask = storageRef
+      .child(`this.basePath/${upload.file.name}`)
+      .put(upload.file);
+    console.log('uploadTask', this.uploadTask);
+    this.uploadTask.on(
+      firebase.storage.TaskEvent.STATE_CHANGED,
+      (snapshot) => {
+        //uplod in progress
+        upload.progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      },
+      (err) => {
+        console.log(err);
+      },
+      () => {
+        upload.url = this.uploadTask.snapshot.downloadURL;
+        console.log(upload.url);
+        upload.name = upload.file.name;
+        this.saveFileData(upload);
+      }
+    );
   }
 
-  saveFileData(upload){
+  saveFileData(upload) {
     console.log('upload successfully');
-    
   }
 
-  deleteUpload(upload: Upload){
-    this.deleteFileData(upload.$key).then(() =>{ this.deleteFileStorage(upload.name)
-    }).catch(error => console.log(error))
+  deleteUpload(upload: Upload) {
+    this.deleteFileData(upload.$key)
+      .then(() => {
+        this.deleteFileStorage(upload.name);
+      })
+      .catch((error) => console.log(error));
   }
 
-  private deleteFileData(key : string){
+  private deleteFileData(key: string) {
     return this.db.list(`${this.basePath}/`).remove(key);
   }
 
-  private deleteFileStorage(name : string){ 
+  private deleteFileStorage(name: string) {
     let storageRef = firebase.storage().ref();
-    storageRef.child(`$(this.basePath)/${name}`).delete()
+    storageRef.child(`$(this.basePath)/${name}`).delete();
   }
-
 }
